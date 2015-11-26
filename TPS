@@ -1,0 +1,114 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class AlemaFarm extends JFrame implements ActionListener {
+    JPanel pane = new JPanel();
+    JLabel [] lab = new JLabel [16];
+    JTextField [] text = new JTextField [3];
+    JButton myButton = new JButton("Calculate");
+    int onionPrice = 7;
+    int tomatoPrice = 10;
+    int saladPrice = 8;
+    int onionQuantity;
+    int tomatoQuantity;
+    int saladQuantity;
+    int totalQuantity;
+    
+    //Constructor
+    AlemaFarm() {
+        super ("Alema's Farm sales Monitor");     //set the frame title 
+        lab[0]= new JLabel("plant Name");
+        lab[1] = new JLabel("  Price ofone Kg(birr)  ");
+        lab[2] = new JLabel("  Quantity ");
+        lab[3] = new JLabel("  Cost  ");
+        
+        lab[4]= new JLabel("onion");
+        lab[5] = new JLabel("7 Birr");
+        lab[6] = new JLabel("     ");
+        lab[7] = new JLabel("tomato");
+        lab[8] = new JLabel("10 Birr");
+        lab[9] = new JLabel("     ");
+        lab[10] = new JLabel("salad");
+        lab[11] = new JLabel("8 Birr");
+        lab[12] = new JLabel("    ");
+        myButton = new JButton("Calculate");
+        lab[13] = new JLabel("Total");
+        lab[14] = new JLabel("   ");
+        lab[15] = new JLabel("        ");
+        for (int i = 0; i<3; i++){
+            text[i] = new JTextField("0      ");
+        }
+        
+        
+        myButton.addActionListener(this);
+        pane.setLayout(new GridLayout(5, 4));
+        
+        for (int i = 0; i<4; i++)
+            pane.add(lab[i]);
+        
+        for (int i=1; i<4; i++){
+            pane.add(lab[3*i+1]);
+            pane.add(lab[3*i+2]);
+            pane.add(text[i-1]);
+            pane.add(lab[3*i+3]);
+        }
+        
+        pane.add(myButton);
+        for (int i = 13; i<16; i++)
+            pane.add(lab[i]);
+        
+        this.getContentPane().add(pane, BorderLayout.CENTER);
+        setDefaultCloseOperation( EXIT_ON_CLOSE ); }
+        
+        public static void main(String[] args)   {
+            AlemaFarm app = new AlemaFarm();
+            app.pack();
+            app.setVisible(true);   }
+            
+        public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
+                if (myButton.getText().equals("Calculate")) {
+                    onionQuantity = (int)(Double.parseDouble(text[0].getText()));
+                    tomatoQuantity =(int)(Double.parseDouble(text[1].getText()));
+                    saladQuantity =(int)(Double.parseDouble(text[2].getText()));
+                    totalQuantity = onionQuantity+tomatoQuantity+saladQuantity;
+                    int onion = onionQuantity*onionPrice;
+                    int tomato = tomatoQuantity*tomatoPrice;
+                    int salad = saladQuantity*saladPrice;
+                    lab[6].setText(Integer.toString(onipn));
+                    lab[9].setText(Integer.toString(tomato));
+                    lab[12].setText(Integer.toString(salad));
+                    
+                    lab[14].setText(Integer.toString(totalQuantity));
+                    lab[15].setText(Integer.toString(onion+tomato+salad));
+                    myButton.setText("Reset");
+                    
+		//Part C. print out the receipt - beginning
+                    if (onionQuantity>0)
+                        System.out.println("onion " + onionQuantity + " @ 7 birr/kg     " + onion);
+                    if (tomatoQuantity>0)
+                        System.out.println("tomato " + tomatoQuantity + " @ 10 birr/kg     " + tomato);
+                    if (saladQuantity>0)
+                        System.out.println("salad " + saladQuantity + " @ 8 birr/kg     " + salad);
+                    if ((onionQuantity+tomatoQuantity+saladQuantity)>0)
+                    {
+                        System.out.println("-----------------------------------------");
+                        System.out.println(" Total: " + totalQuantity + " blance: " + (onion+tomato+salad) + " birr");
+                        System.out.println(" Thank you, from Alema Farm");
+}
+//Part C. print out the receipt - end
+                }
+                else {
+                    lab[6].setText("    ");
+                    lab[9].setText("    ");
+                    lab[12].setText("    ");
+                    lab[14].setText("    ");
+                    lab[15].setText("    ");
+                    for (int i = 0; i<3; i++){
+                        text[i].setText("0      ");
+                    }
+                    myButton.setText("Calculate");
+                }
+            }   
+}
+
